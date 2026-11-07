@@ -1,0 +1,6 @@
+{
+  "appHost": {
+    "language": "csharp",
+    "path": "TodoApp.AppHost/apphost.cs"
+  }
+}
