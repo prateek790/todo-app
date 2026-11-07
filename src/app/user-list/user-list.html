@@ -1,0 +1,94 @@
+<section class="users-page">
+  <div class="page-heading">
+    <div>
+      <span class="eyebrow">DIRECTORY</span>
+      <h1>Users</h1>
+      <p>Manage your team members and their information.</p>
+    </div>
+    <a class="primary-button" routerLink="/users/new"><span aria-hidden="true">+</span> Add user</a>
+  </div>
+
+  <section class="directory-card" aria-label="User directory">
+    <div class="directory-toolbar">
+      <div>
+        <h2>All users <span class="count">{{ users().length }}</span></h2>
+        <p>Your people, all in one place.</p>
+      </div>
+      <label class="search-box">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input
+          type="search"
+          placeholder="Search users..."
+          aria-label="Search users"
+          [value]="searchTerm()"
+          (input)="onSearch($event)"
+        />
+      </label>
+    </div>
+
+    @if (errorMessage(); as error) {
+      <p class="directory-error" role="alert">{{ error }}</p>
+    }
+
+    @if (isLoading()) {
+      <p class="directory-message" role="status">Loading users...</p>
+    } @else if (errorMessage() && users().length === 0) {
+      <div class="empty-state">
+        <h3>Directory unavailable</h3>
+        <p>Start the API and SQL Server, then try again.</p>
+        <button class="primary-button" type="button" (click)="loadUsers()">Try again</button>
+      </div>
+    } @else if (filteredUsers().length > 0) {
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">NAME</th>
+              <th scope="col">CONTACT</th>
+              <th scope="col">GENDER</th>
+              <th scope="col">DATE OF BIRTH</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">TYPE</th>
+              <th scope="col"><span class="visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (user of filteredUsers(); track user.id) {
+              <tr>
+                <td>
+                  <div class="person">
+                    <span class="avatar">{{ user.name.charAt(0).toUpperCase() }}</span>
+                    <span class="person-name">{{ user.name }}</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="contact-email">{{ user.email }}</span>
+                  <span class="contact-mobile">{{ user.mobile }}</span>
+                </td>
+                <td>{{ user.gender }}</td>
+                <td>{{ user.dob | date: 'd MMM yyyy' }}</td>
+                <td><span class="status" [class.inactive]="!user.isActive">{{ user.isActive ? 'Active' : 'Inactive' }}</span></td>
+                <td><span class="type-tag">{{ user.userType || 'User' }}</span></td>
+                <td>
+                  <div class="row-actions">
+                    <a class="icon-button" [routerLink]="['/users', user.id, 'edit']" [attr.aria-label]="'Edit ' + user.name" title="Edit user">↗</a>
+                    <button class="icon-button delete-button" type="button" (click)="deleteUser(user)" [attr.aria-label]="'Delete ' + user.name" title="Delete user">×</button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="empty-state">
+        <span class="empty-icon" aria-hidden="true">⌕</span>
+        <h3>{{ users().length === 0 ? 'No users yet' : 'No matching users' }}</h3>
+        <p>{{ users().length === 0 ? 'Add your first user to get started.' : 'Try a different name, email, or phone number.' }}</p>
+        @if (users().length === 0) {
+          <a class="primary-button" routerLink="/users/new">Add your first user</a>
+        }
+      </div>
+    }
+  </section>
+</section>

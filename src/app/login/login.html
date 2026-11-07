@@ -1,0 +1,84 @@
+<section class="login-card" aria-labelledby="login-title">
+  <div class="login-mark" aria-hidden="true">P</div>
+  <p class="login-eyebrow">{{ isSignUp() ? 'GET STARTED' : 'WELCOME BACK' }}</p>
+  <h1 id="login-title">{{ isSignUp() ? 'Create your account' : 'Sign in to PeopleDesk' }}</h1>
+  <p class="login-intro">
+    {{ isSignUp() ? 'Create an account to get started with PeopleDesk.' : 'Use your account email and password to continue.' }}
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    @if (isSignUp()) {
+      <label for="name">Full name</label>
+      <input id="name" type="text" formControlName="name" autocomplete="name" />
+      @if (form.controls.name.touched && form.controls.name.invalid) {
+        <span class="field-error">Enter your name.</span>
+      }
+
+      <label for="mobile">Mobile number</label>
+      <input id="mobile" type="tel" formControlName="mobile" autocomplete="tel" />
+      @if (form.controls.mobile.touched && form.controls.mobile.invalid) {
+        <span class="field-error">Enter a valid mobile number with at least 7 digits.</span>
+      }
+
+      <label for="gender">Gender</label>
+      <select id="gender" formControlName="gender">
+        <option value="" disabled>Select an option</option>
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Non-binary">Non-binary</option>
+        <option value="Prefer not to say">Prefer not to say</option>
+      </select>
+      @if (form.controls.gender.touched && form.controls.gender.invalid) {
+        <span class="field-error">Select an option.</span>
+      }
+
+      <label for="dob">Date of birth</label>
+      <input id="dob" type="date" formControlName="dob" [max]="maxDob" />
+      @if (form.controls.dob.touched && form.controls.dob.invalid) {
+        <span class="field-error">Enter your date of birth.</span>
+      }
+    }
+
+    <label for="email">Email address</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      autocomplete="username"
+      [attr.aria-invalid]="form.controls.email.touched && form.controls.email.invalid"
+    />
+    @if (form.controls.email.touched && form.controls.email.invalid) {
+      <span class="field-error">Enter a valid email address.</span>
+    }
+
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      [attr.autocomplete]="isSignUp() ? 'new-password' : 'current-password'"
+      [attr.aria-invalid]="form.controls.password.touched && form.controls.password.invalid"
+    />
+    @if (form.controls.password.touched && form.controls.password.invalid) {
+      <span class="field-error">
+        {{ isSignUp() ? 'Use a password with at least 12 characters.' : 'Enter your password.' }}
+      </span>
+    }
+
+    @if (errorMessage()) {
+      <p class="login-error" role="alert">{{ errorMessage() }}</p>
+    }
+
+    <button class="login-submit" type="submit" [disabled]="isSubmitting()">
+      {{ isSubmitting() ? (isSignUp() ? 'Creating account…' : 'Signing in…') : (isSignUp() ? 'Create account' : 'Sign in') }}
+    </button>
+  </form>
+
+  <p class="mode-switch">
+    {{ isSignUp() ? 'Already have an account?' : 'Don’t have an account?' }}
+    <button type="button" class="mode-link" (click)="setSignUp(!isSignUp())">
+      {{ isSignUp() ? 'Sign in' : 'Sign up' }}
+    </button>
+  </p>
+  <a class="back-link" routerLink="/">Back to PeopleDesk</a>
+</section>

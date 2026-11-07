@@ -1,0 +1,284 @@
+.welcome {
+  align-items: center;
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 1.1fr 0.9fr;
+  min-height: 470px;
+}
+
+.welcome-copy {
+  max-width: 560px;
+}
+
+.eyebrow {
+  align-items: center;
+  color: #7d8499;
+  display: inline-flex;
+  font-size: 11px;
+  font-weight: 750;
+  gap: 9px;
+  letter-spacing: 1.5px;
+}
+
+.status-dot,
+.online-indicator {
+  background: #35bc8d;
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+}
+
+h1 {
+  color: #17213a;
+  font-size: clamp(42px, 5.2vw, 66px);
+  letter-spacing: -3.8px;
+  line-height: 1.06;
+  margin: 27px 0 20px;
+}
+
+h1 span {
+  color: #5546e8;
+}
+
+.welcome-copy > p {
+  color: #7a8297;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+  max-width: 475px;
+}
+
+.welcome-actions {
+  align-items: center;
+  display: flex;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.primary-button {
+  align-items: center;
+  background: #5546e8;
+  border-radius: 9px;
+  box-shadow: 0 8px 18px #5546e82c;
+  color: white;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 650;
+  gap: 17px;
+  padding: 13px 17px;
+  text-decoration: none;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.primary-button:hover {
+  background: #4435d4;
+  transform: translateY(-1px);
+}
+
+.primary-button span {
+  font-size: 18px;
+}
+
+.text-link {
+  color: #5546e8;
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.quick-stat {
+  align-items: center;
+  border-top: 1px solid #e7e9f1;
+  display: flex;
+  gap: 13px;
+  margin-top: 45px;
+  max-width: 255px;
+  padding-top: 19px;
+}
+
+.stat-icon {
+  align-items: center;
+  background: #ecebff;
+  border-radius: 11px;
+  color: #5546e8;
+  display: inline-flex;
+  font-size: 20px;
+  height: 42px;
+  justify-content: center;
+  width: 42px;
+}
+
+.quick-stat strong,
+.quick-stat small {
+  display: block;
+}
+
+.quick-stat strong {
+  color: #25304a;
+  font-size: 16px;
+}
+
+.quick-stat small {
+  color: #8a91a3;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.api-error {
+  color: #bd4d4d;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 13px 0 0;
+  max-width: 290px;
+}
+
+.welcome-art {
+  align-items: center;
+  background: radial-gradient(ellipse at center, #efedff 0, #f3f2ff 42%, transparent 72%);
+  display: flex;
+  justify-content: center;
+  min-height: 390px;
+  position: relative;
+}
+
+.orbit {
+  border: 1px solid #dedbff;
+  border-radius: 50%;
+  height: 330px;
+  position: absolute;
+  transform: rotate(-24deg);
+  width: 400px;
+}
+
+.orbit-two {
+  height: 270px;
+  transform: rotate(38deg);
+  width: 360px;
+}
+
+.profile-card {
+  background: #fff;
+  border: 1px solid #ececf4;
+  border-radius: 18px;
+  box-shadow: 0 22px 65px #34306c1a;
+  padding: 26px;
+  position: relative;
+  transform: rotate(-3deg);
+  width: 265px;
+}
+
+.profile-top {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-avatar {
+  align-items: center;
+  background: linear-gradient(135deg, #7166f4, #a199ff);
+  border-radius: 14px;
+  color: white;
+  display: flex;
+  font-size: 17px;
+  font-weight: 700;
+  height: 54px;
+  justify-content: center;
+  width: 54px;
+}
+
+.online-indicator {
+  box-shadow: 0 0 0 5px #e8f8f2;
+  height: 9px;
+  width: 9px;
+}
+
+.profile-name,
+.profile-role {
+  display: block;
+}
+
+.profile-name {
+  color: #27314b;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.profile-role {
+  color: #9298a9;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.profile-divider {
+  background: #eceef4;
+  height: 1px;
+  margin: 19px 0 13px;
+}
+
+.profile-detail {
+  align-items: center;
+  color: #697188;
+  display: flex;
+  font-size: 12px;
+  gap: 10px;
+  margin: 11px 0;
+}
+
+.detail-icon {
+  align-items: center;
+  background: #f1f0ff;
+  border-radius: 7px;
+  color: #6a5bf0;
+  display: inline-flex;
+  font-size: 12px;
+  height: 25px;
+  justify-content: center;
+  width: 25px;
+}
+
+.floating-dot {
+  background: #fff;
+  border: 5px solid #dcd9ff;
+  border-radius: 50%;
+  height: 25px;
+  position: absolute;
+  width: 25px;
+}
+
+.dot-one {
+  right: 14%;
+  top: 20%;
+}
+
+.dot-two {
+  bottom: 17%;
+  left: 17%;
+}
+
+@media (max-width: 760px) {
+  .welcome {
+    gap: 6px;
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-art {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 440px) {
+  h1 {
+    letter-spacing: -2.5px;
+  }
+
+  .welcome-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
