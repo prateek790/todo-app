@@ -1,0 +1,140 @@
+<section class="form-page">
+  <a class="back-link" routerLink="/users"><span aria-hidden="true">←</span> Back to users</a>
+
+  @if (notFound()) {
+    <section class="not-found">
+      <span class="not-found-icon" aria-hidden="true">!</span>
+      <h1>User not found</h1>
+      <p>This user may have been removed from the directory.</p>
+      <a class="primary-button" routerLink="/users">Return to users</a>
+    </section>
+  } @else {
+    <div class="form-heading">
+      <span class="eyebrow">{{ isEditing ? 'UPDATE DIRECTORY' : 'NEW DIRECTORY ENTRY' }}</span>
+      <h1>{{ isEditing ? 'Edit user' : 'Add a user' }}</h1>
+      <p>{{ isEditing ? 'Update this user’s details below.' : 'Add someone new to your people directory.' }}</p>
+    </div>
+
+    @if (errorMessage(); as error) {
+      <p class="form-error" role="alert">{{ error }}</p>
+    }
+
+    @if (isLoading()) {
+      <p class="form-loading" role="status">Loading user details...</p>
+    } @else {
+    <form class="user-form" [formGroup]="form" (ngSubmit)="save()" novalidate>
+      <div class="form-section-title">
+        <span class="section-icon" aria-hidden="true">01</span>
+        <div><h2>Personal information</h2><p>Tell us a little about this person.</p></div>
+      </div>
+
+      <div class="fields-grid">
+        <label class="field full-width">
+          <span>Full name <b>*</b></span>
+          <input type="text" formControlName="name" placeholder="e.g. Ankit Sahu" autocomplete="name" />
+          @if (form.controls.name.touched && form.controls.name.hasError('required')) {
+            <small class="error">Name is required.</small>
+          }
+          @if (form.controls.name.touched && form.controls.name.hasError('pattern')) {
+            <small class="error">Name cannot be blank.</small>
+          }
+          @if (form.controls.name.touched && form.controls.name.hasError('maxlength')) {
+            <small class="error">Name must be 80 characters or fewer.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Email address <b>*</b></span>
+          <input type="email" formControlName="email" placeholder="name@example.com" autocomplete="email" />
+          @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+            <small class="error">Email is required.</small>
+          }
+          @if (form.controls.email.touched && form.controls.email.hasError('email')) {
+            <small class="error">Enter a valid email address.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Mobile number <b>*</b></span>
+          <input type="tel" formControlName="mobile" placeholder="e.g. 9876543210" autocomplete="tel" />
+          @if (form.controls.mobile.touched && form.controls.mobile.hasError('required')) {
+            <small class="error">Mobile number is required.</small>
+          }
+          @if (form.controls.mobile.touched && form.controls.mobile.hasError('pattern')) {
+            <small class="error">Enter a valid phone number.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Gender <b>*</b></span>
+          <select formControlName="gender">
+            <option value="" disabled>Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Non-binary">Non-binary</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+          @if (form.controls.gender.touched && form.controls.gender.hasError('required')) {
+            <small class="error">Select a gender option.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Date of birth <b>*</b></span>
+          <input type="date" formControlName="dob" />
+          @if (form.controls.dob.touched && form.controls.dob.hasError('required')) {
+            <small class="error">Date of birth is required.</small>
+          }
+        </label>
+
+        <div class="field range-field full-width">
+          <span>Range <small>(0–10)</small></span>
+          <div class="range-controls">
+            <label>
+              <span>From <output>{{ form.controls.rangeStart.value }}</output></span>
+              <input type="range" min="0" max="10" step="1" formControlName="rangeStart" />
+            </label>
+            <label>
+              <span>To <output>{{ form.controls.rangeEnd.value }}</output></span>
+              <input type="range" min="0" max="10" step="1" formControlName="rangeEnd" />
+            </label>
+          </div>
+          @if (form.hasError('rangeOrder')) {
+            <small class="error">The start of the range must not exceed its end.</small>
+          }
+        </div>
+      </div>
+
+      <div class="form-section-title second-section">
+        <span class="section-icon" aria-hidden="true">02</span>
+        <div><h2>Account details</h2><p>Set the person’s access and status.</p></div>
+      </div>
+
+      <div class="fields-grid account-fields">
+        <fieldset class="field user-type-field">
+          <legend>User type <b>*</b></legend>
+          <div class="radio-options">
+            <label><input type="radio" formControlName="userType" value="User" /> User</label>
+            <label><input type="radio" formControlName="userType" value="Admin" /> Admin</label>
+          </div>
+        </fieldset>
+
+        <div class="field active-field">
+          <span>Account status</span>
+          <label class="toggle-label">
+            <input type="checkbox" formControlName="isActive" />
+            <span class="toggle" aria-hidden="true"></span>
+            <span>{{ form.controls.isActive.value ? 'Active' : 'Inactive' }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <a class="cancel-button" routerLink="/users">Cancel</a>
+        <button class="reset-button" type="button" (click)="reset()" [disabled]="isSaving()">Reset</button>
+        <button class="primary-button" type="submit" [disabled]="isSaving()">{{ isSaving() ? 'Saving...' : isEditing ? 'Save changes' : 'Create user' }}</button>
+      </div>
+    </form>
+    }
+  }
+</section>

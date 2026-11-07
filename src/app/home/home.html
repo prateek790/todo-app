@@ -1,0 +1,39 @@
+<section class="welcome">
+  <div class="welcome-copy">
+    <span class="eyebrow"><span class="status-dot"></span> PEOPLE MANAGEMENT</span>
+    <h1>A clearer view<br />of your <span>people.</span></h1>
+    <p>Keep your team details organized in one simple place. Add, update, and manage your users whenever you need to.</p>
+    <div class="welcome-actions">
+      <a class="primary-button" routerLink="/users">View users <span aria-hidden="true">→</span></a>
+      <a class="text-link" routerLink="/users/new">Add a new user</a>
+    </div>
+    <div class="quick-stat">
+      <span class="stat-icon" aria-hidden="true">◎</span>
+      <span>
+        <strong>{{ userCount() ?? '—' }}</strong>
+        <small>{{ userCount() === 1 ? 'user' : 'users' }} in your directory</small>
+      </span>
+    </div>
+    @if (errorMessage(); as error) {
+      <p class="api-error" role="alert">{{ error }}</p>
+    }
+  </div>
+
+  <div class="welcome-art" aria-hidden="true">
+    <div class="orbit orbit-one"></div>
+    <div class="orbit orbit-two"></div>
+    <div class="profile-card">
+      <div class="profile-top">
+        <span class="profile-avatar">AS</span>
+        <span class="online-indicator"></span>
+      </div>
+      <span class="profile-name">Your team, organized</span>
+      <span class="profile-role">People directory</span>
+      <div class="profile-divider"></div>
+      <div class="profile-detail"><span class="detail-icon">✉</span> Contact details</div>
+      <div class="profile-detail"><span class="detail-icon">✓</span> Active members</div>
+    </div>
+    <span class="floating-dot dot-one"></span>
+    <span class="floating-dot dot-two"></span>
+  </div>
+</section>
