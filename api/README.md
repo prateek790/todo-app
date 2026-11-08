@@ -45,7 +45,7 @@ In Development:
 
 The API requires `ConnectionStrings__DefaultConnection`. Development settings already point Redis to `localhost:6379`; production must provide `ConnectionStrings__redis` through configuration or an environment variable.
 
-When running the API directly with its Development launch profile, start Redis first. In Git Bash, from the `api` directory:
+When running the API directly with its Development launch profile, start Redis for authenticated API requests and the shared rate limit. Anonymous sign-up and sign-in requests do not need Redis. In Git Bash, from the `api` directory:
 
 ```sh
 export SQL_SA_PASSWORD='ReplaceWithAStrongPassword123!'
