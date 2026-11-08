@@ -20,7 +20,9 @@ export class Home implements OnInit {
         this.userCount.set(users.length);
       },
       error: () => {
-        this.errorMessage.set('Could not load directory details. Check that the API is running.');
+        this.errorMessage.set(
+          'Could not load directory details. Check that the API, SQL Server, and Redis rate-limit service are running.',
+        );
       },
     });
   }

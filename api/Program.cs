@@ -48,9 +48,11 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 var redisConnectionString = builder.Configuration.GetConnectionString("redis")
     ?? throw new InvalidOperationException(
         "Redis connection string 'redis' is missing. Set ConnectionStrings__redis.");
+var redisOptions = ConfigurationOptions.Parse(redisConnectionString);
+redisOptions.AbortOnConnectFail = false;
 builder.Services.AddDbContext<UserDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddSingleton<IConnectionMultiplexer>(
-    _ => ConnectionMultiplexer.Connect(redisConnectionString));
+    _ => ConnectionMultiplexer.Connect(redisOptions));
 builder.Services.AddSingleton<RedisUserRateLimiter>();
 builder.Services.AddScoped<IPasswordHasher<UserCredential>, PasswordHasher<UserCredential>>();
 builder.Services.AddScoped<IAuthService, AuthService>();

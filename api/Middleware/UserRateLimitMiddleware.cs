@@ -9,7 +9,7 @@ public sealed class UserRateLimitMiddleware(
     RequestDelegate next,
     ILogger<UserRateLimitMiddleware> logger)
 {
-    public async Task InvokeAsync(HttpContext context, RedisUserRateLimiter rateLimiter)
+    public async Task InvokeAsync(HttpContext context, IServiceProvider services)
     {
         if (context.User.Identity?.IsAuthenticated != true)
         {
@@ -34,6 +34,7 @@ public sealed class UserRateLimitMiddleware(
         UserRateLimitResult result;
         try
         {
+            var rateLimiter = services.GetRequiredService<RedisUserRateLimiter>();
             result = await rateLimiter.ConsumeAsync(userId);
         }
         catch (RedisException exception)

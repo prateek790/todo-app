@@ -45,7 +45,9 @@ export class UserList implements OnInit {
         this.isLoading.set(false);
       },
       error: () => {
-        this.errorMessage.set('Could not load users. Check that the API and SQL Server are running.');
+        this.errorMessage.set(
+          'Could not load users. Check that the API, SQL Server, and Redis rate-limit service are running.',
+        );
         this.isLoading.set(false);
       },
     });
