@@ -43,10 +43,14 @@ In Development:
 - Interactive API documentation is available at `https://localhost:7228/swagger`.
 - The OpenAPI document is available at `https://localhost:7228/openapi/v1.json`.
 
-The API requires `ConnectionStrings__DefaultConnection` and `ConnectionStrings__redis`; it reports a clear startup error if either is missing. For a local API process, configure Redis at `localhost:6379`:
+The API requires `ConnectionStrings__DefaultConnection`. Development settings already point Redis to `localhost:6379`; production must provide `ConnectionStrings__redis` through configuration or an environment variable.
+
+When running the API directly with its Development launch profile, start Redis first. In Git Bash, from the `api` directory:
 
 ```sh
-export ConnectionStrings__redis='localhost:6379'
+export SQL_SA_PASSWORD='ReplaceWithAStrongPassword123!'
+docker compose up -d redis
+dotnet run
 ```
 
 ## JWT authentication
