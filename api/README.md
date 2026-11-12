@@ -1,6 +1,6 @@
 # User API
 
-ASP.NET Core 10 Web API for the Angular to-do-list workspace's user directory.
+ASP.NET Core 11 Web API for the Angular to-do-list workspace's user directory. Building and running the API requires the .NET 11 SDK.
 
 ## SQL Server and code-first migrations
 
@@ -52,6 +52,8 @@ export SQL_SA_PASSWORD='ReplaceWithAStrongPassword123!'
 docker compose up -d redis
 dotnet run
 ```
+
+Unhandled API exceptions are returned as a generic `500` Problem Details response and logged to `api/log/YYYY-MM-DD.txt` using UTC dates. The log directory is created at runtime when an exception is logged. Keep the API content root writable and treat the log files as sensitive operational data.
 
 ## JWT authentication
 
