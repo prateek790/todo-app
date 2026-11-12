@@ -53,6 +53,8 @@ docker compose up -d redis
 dotnet run
 ```
 
+Unhandled API exceptions are returned as a generic `500` Problem Details response and logged to `api/log/YYYY-MM-DD.txt` using UTC dates. Keep the log directory writable and treat the files as sensitive operational data.
+
 ## JWT authentication
 
 User API endpoints require a bearer token. The API issues 30-minute JWTs, stores password hashes separately from user profile data, and persists revoked token IDs so logout invalidates the token immediately. Existing users have no password until one is provisioned.
